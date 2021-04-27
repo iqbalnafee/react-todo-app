@@ -1,11 +1,29 @@
 import React from 'react'
+import PropTypes from "prop-types";
 
-const Form = () => {
+const Form = (props) => {
+
+    const {setText,todos,setTodos,text} = props;
+
+    const inputTextChange = (e) => {
+        setText(e.target.value);
+    }
+
+    const submitTodoHandler = (e) => {
+        e.preventDefault();
+        setTodos([
+
+            ...todos,{text:text,completed:false,id:Math.ceil(Math.random()*1000)}
+
+        ]);
+        setText('');
+    }
+
     return(
 
         <form>
-            <input type="text" className="todo-input" />
-            <button className="todo-button" type="submit">
+            <input type="text" value={text} className="todo-input" onChange={inputTextChange}/>
+            <button className="todo-button" type="submit" onClick={submitTodoHandler}>
                 <i className="fas fa-plus-square"></i>
             </button>
             <div className="select">
@@ -19,6 +37,14 @@ const Form = () => {
 
 
     );
+}
+
+Form.prototypes = {
+    setText : PropTypes.func.isRequired,
+    todos : PropTypes.object.isRequired,
+    setTodos : PropTypes.func.isRequired,
+    text : PropTypes.string.isRequired,
+
 }
 
 export default Form;
