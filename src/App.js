@@ -16,7 +16,7 @@ const App = () => {
       </header>
 
       <Form todos={todos} text={text} setTodos={setTodos} setText={setText}/> 
-      <Todolist />
+      <Todolist todos={todos} setTodos={setTodos}/>
     </div>
   );
 }
